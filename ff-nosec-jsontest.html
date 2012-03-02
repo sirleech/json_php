@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript">
+
+if (navigator.userAgent.indexOf("Firefox") != -1) {
+    try {
+        netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
+    } 
+    catch (e) {
+        alert("Permission UniversalBrowserRead denied -- not running Mozilla?");
+    }
+}
+
+
+var client = new XMLHttpRequest();
+client.open('GET', 'http://134.178.153.22/restrictionAreas/8');
+client.onreadystatechange = function() {
+	if(client.readyState == 4) {
+  		var text = client.responseText;
+  		alert(text);
+  		var jsonobj = eval("("+text+")");
+		alert(jsonobj.restrictionArea.shortName);
+	}
+}
+
+client.send();
+
+</script>
+</head>
+</html>
